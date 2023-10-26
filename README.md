@@ -1,12 +1,12 @@
-# OSC Data Exchange Example
+# OSC Data Exchange Template
 
-This example shows how to use the Open Sound Control (OSC) protocol to exchange data between [Processing](https://processing.org/) and [Max](https://cycling74.com/products/max).
+This OSC Data Exchange Template demonstrates how to seamlessly exchange data between [Processing](https://processing.org/) and [Max](https://cycling74.com/products/max) using the [Open Sound Control](https://en.wikipedia.org/wiki/Open_Sound_Control) protocol. This template serves as a perfect starting point for audiovisual projects, enabling interactive and dynamic data exchange between the two platforms.
 
 ![Project Screenshot](/project-screenshot.jpg)
 
 ## Setup
 
-In order to run this example, you need to install the `oscP5` library by [Andreas Schlegel](https://www.sojamo.de/). Follow these steps to install the library:
+In order to run this template, you need to install the `oscP5` library by [Andreas Schlegel](https://www.sojamo.de/). Follow these steps to install the library:
 
 1. Open the Processing IDE.
 2. Go to Sketch -> Import Library... -> Manage Libraries...
