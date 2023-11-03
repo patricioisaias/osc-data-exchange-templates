@@ -6,7 +6,7 @@ This repository contains several templates showing how to use the [Open Sound Co
 
 ## Setup
 
-In order to run this example, you need to install the `oscP5` library by [Andreas Schlegel](https://www.sojamo.de/). Follow these steps to install the library:
+In order to run this template, you need to install the `oscP5` library by [Andreas Schlegel](https://www.sojamo.de/). Follow these steps to install the library:
 
 1. Open the Processing IDE.
 2. Go to Sketch -> Import Library... -> Manage Libraries...
