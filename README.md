@@ -1,8 +1,8 @@
-# OSC Data Exchange Example
+# OSC Data Exchange Templates
 
-This example shows how to use the Open Sound Control (OSC) protocol to exchange data between [Processing](https://processing.org/) and [Max](https://cycling74.com/products/max).
+This repository contains several templates showing how to use the [Open Sound Control](https://en.wikipedia.org/wiki/Open_Sound_Control) protocol to exchange data between [Processing](https://processing.org/), [Max](https://cycling74.com/products/max) and [Pure Data](https://puredata.info/).
 
-![Project Screenshot](/project-screenshot.jpg)
+![Project Screenshot](/images/project-screenshot.jpg)
 
 ## Setup
 
