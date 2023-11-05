@@ -1,8 +1,8 @@
 /*
- * Author: Patricio Isaías (patricio.isaiascv@gmail.com)
+ * Author: Patricio Isaías (https://linktr.ee/patricioisaias)
  * Creation date: 2023-10-23
- * Description: Send and receive data between Processing and Max using OSC.
- * MIT License
+ * Description: Send and receive data using the Open Sound Control (OSC) protocol
+ * License: MIT
  */
 
 // Import libraries
@@ -18,7 +18,7 @@ int receivePort; // Port number for receiving OSC messages
 String ip; // IP address of the remote location
 
 // Sketch global variables
-Ball ball; 
+Ball ball;
 int ballColor;
 
 void setup() {
@@ -26,14 +26,15 @@ void setup() {
   ball = new Ball(width / 2, height / 2);
 
   // Initialize OSC and set remote address and ports
-  ip = "192.168.1.3";  // Remote IP address (change to your localhost)
+  ip = "192.168.1.11";  // Remote IP address (change to your localhost)
   sendPort = 9600;  // Port number for sending OSC messages
   receivePort = 9700;  // Port number for receiving OSC messages
 
-  // Initialize OSC objects for sending and receiving messages
+  // Initialize OSC objects for sending messages
   oscP5Send = new OscP5(this, sendPort); // Initialize OSC sender
   myRemoteLocation = new NetAddress(ip, sendPort); // Set remote OSC address for sending messages
 
+  // Initialize OSC objects for receiving messages
   oscP5Receive = new OscP5(this, receivePort); // Initialize OSC receiver
   oscP5Receive.plug(this, "setAmp", "/amp"); // Register the setAmp method to handle OSC messages with the address "/amp"
 }
@@ -51,8 +52,8 @@ void draw() {
 
 // Ball class for animation
 class Ball {
-  int x, y; 
-  int radius; 
+  int x, y;
+  int radius;
   int speed;
 
   // Constructor to initialize the Ball object
@@ -60,7 +61,7 @@ class Ball {
     this.x = x;
     this.y = y;
     this.radius = width / 6;
-    this.speed = 12; 
+    this.speed = 12;
   }
 
   // Update the ball's position and handle collisions
@@ -71,14 +72,14 @@ class Ball {
     if (this.y > height - this.radius) {
       this.y = height - this.radius;
       this.speed *= -1;
-      // Send OSC message to Max
+      // Send OSC message
       OscMessage message1 = new OscMessage("/b1");
       message1.add(1);
       oscP5Send.send(message1, myRemoteLocation);
     } else if (this.y < this.radius) {
       this.y = this.radius;
       this.speed *= -1;
-      // Send OSC message to Max
+      // Send OSC message
       OscMessage message2 = new OscMessage("/b2");
       message2.add(1);
       oscP5Send.send(message2, myRemoteLocation);
@@ -87,7 +88,7 @@ class Ball {
 
   // Display the ball on the canvas
   void display() {
-    fill(ballColor, 0 ,0);
+    fill(ballColor, 0, 0);
     noStroke();
     ellipse(this.x, this.y, this.radius * 2, this.radius * 2);
   }

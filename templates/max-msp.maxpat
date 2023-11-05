@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 995.0, 85.0, 890.0, 912.0 ],
+		"rect" : [ 35.0, 85.0, 890.0, 912.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -40,13 +40,25 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontface" : 0,
+					"id" : "obj-7",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 147.699348986148834, 360.128806409820413, 122.0, 20.0 ],
+					"text" : "Make some sounds!"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-18",
 					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 499.888888537883759, 65.245261816157267, 55.0, 36.0 ],
+					"patching_rect" : [ 524.771149873733521, 65.245261816157267, 55.0, 36.0 ],
 					"text" : ";\r\ndsp start"
 				}
 
@@ -58,7 +70,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 499.888888537883759, 30.0, 58.0, 22.0 ],
+					"patching_rect" : [ 524.771149873733521, 30.0, 58.0, 22.0 ],
 					"text" : "loadbang"
 				}
 
@@ -116,7 +128,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 432.021150171756744, 418.6912613936056, 173.499999403953552, 20.0 ],
+					"patching_rect" : [ 436.021150171756744, 419.6912613936056, 173.499999403953552, 20.0 ],
 					"text" : "Send data with /tags"
 				}
 
@@ -281,12 +293,12 @@
 				"box" : 				{
 					"fontface" : 0,
 					"id" : "obj-2",
-					"linecount" : 3,
+					"linecount" : 4,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 46.388888537883759, 64.950982838869095, 551.0, 48.0 ],
-					"text" : "Author: Patricio Isaías\nCreation date: 2023-10-23\nDescription: Send and receive data between Processing and Max using OSC"
+					"patching_rect" : [ 46.388888537883759, 64.950982838869095, 551.0, 62.0 ],
+					"text" : "Author: Patricio Isaías (https://linktr.ee/patricioisaias)\nCreation date: 2023-10-23\nDescription: Send and receive data using the Open Sound Control (OSC) protocol\nLicense: MIT"
 				}
 
 			}
