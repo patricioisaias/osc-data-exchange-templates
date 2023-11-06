@@ -10,29 +10,28 @@ import netP5.*;
 import oscP5.*;
 
 // Global variables for OSC communication
-OscP5 oscP5Send; // OSC sender object
-OscP5 oscP5Receive; // OSC receiver object
+OscP5 oscP5Send; // OSC sender object for sending messages
+OscP5 oscP5Receive; // OSC receiver object for receiving messages
 NetAddress myRemoteLocation; // Remote OSC address
-int sendPort; // Port number for sending OSC messages
-int receivePort; // Port number for receiving OSC messages
-String ip; // IP address of the remote location
+int sendPort = 9600; // Port number for sending OSC messages
+int receivePort = 9700; // Port number for receiving OSC messages
+String remoteIp = "192.168.1.11"; // IP address of the remote location (change to your localhost)
+
+// Constants for OSC addresses
+final String OSC_ADDRESS_B1 = "/b1";
+final String OSC_ADDRESS_B2 = "/b2";
 
 // Sketch global variables
 Ball ball;
-int ballColor;
+int ballColor = 0; // Default ball color
 
 void setup() {
   size(500, 500);
   ball = new Ball(width / 2, height / 2);
 
-  // Initialize OSC and set remote address and ports
-  ip = "192.168.1.11";  // Remote IP address (change to your localhost)
-  sendPort = 9600;  // Port number for sending OSC messages
-  receivePort = 9700;  // Port number for receiving OSC messages
-
   // Initialize OSC objects for sending messages
   oscP5Send = new OscP5(this, sendPort); // Initialize OSC sender
-  myRemoteLocation = new NetAddress(ip, sendPort); // Set remote OSC address for sending messages
+  myRemoteLocation = new NetAddress(remoteIp, sendPort); // Set remote OSC address for sending messages
 
   // Initialize OSC objects for receiving messages
   oscP5Receive = new OscP5(this, receivePort); // Initialize OSC receiver
@@ -42,6 +41,12 @@ void setup() {
 // Callback function to handle incoming OSC messages with the "/amp" tag
 public void setAmp(int amp) {
   ballColor = amp; // Set the ball color based on the received OSC message
+}
+
+void sendOSCMessage(String address) {
+  OscMessage message = new OscMessage(address);
+  message.add(1);
+  oscP5Send.send(message, myRemoteLocation);
 }
 
 void draw() {
@@ -73,16 +78,12 @@ class Ball {
       this.y = height - this.radius;
       this.speed *= -1;
       // Send OSC message
-      OscMessage message1 = new OscMessage("/b1");
-      message1.add(1);
-      oscP5Send.send(message1, myRemoteLocation);
+      sendOSCMessage(OSC_ADDRESS_B1);
     } else if (this.y < this.radius) {
       this.y = this.radius;
       this.speed *= -1;
       // Send OSC message
-      OscMessage message2 = new OscMessage("/b2");
-      message2.add(1);
-      oscP5Send.send(message2, myRemoteLocation);
+      sendOSCMessage(OSC_ADDRESS_B2);
     }
   }
 
