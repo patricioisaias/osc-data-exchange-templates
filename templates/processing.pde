@@ -9,6 +9,13 @@
 import netP5.*;
 import oscP5.*;
 
+// Constants for OSC addresses
+String OSC_ADDRESS_B1 = "/b1";
+String OSC_ADDRESS_B2 = "/b2";
+
+// Sketch global variables
+Ball ball;
+
 // Global variables for OSC communication
 OscP5 oscP5Send; // OSC sender object for sending messages
 OscP5 oscP5Receive; // OSC receiver object for receiving messages
@@ -17,18 +24,14 @@ int sendPort = 9600; // Port number for sending OSC messages
 int receivePort = 9700; // Port number for receiving OSC messages
 String remoteIp = "192.168.1.11"; // IP address of the remote location (change to your localhost)
 
-// Constants for OSC addresses
-final String OSC_ADDRESS_B1 = "/b1";
-final String OSC_ADDRESS_B2 = "/b2";
-
-// Sketch global variables
-Ball ball;
-int ballColor = 0; // Default ball color
-
 void setup() {
   size(500, 500);
   ball = new Ball(width / 2, height / 2);
+  initializeOSC();
+}
 
+// Initialize OSC communication
+void initializeOSC() {
   // Initialize OSC objects for sending messages
   oscP5Send = new OscP5(this, sendPort); // Initialize OSC sender
   myRemoteLocation = new NetAddress(remoteIp, sendPort); // Set remote OSC address for sending messages
@@ -40,13 +43,7 @@ void setup() {
 
 // Callback function to handle incoming OSC messages with the "/amp" tag
 public void setAmp(int amp) {
-  ballColor = amp; // Set the ball color based on the received OSC message
-}
-
-void sendOSCMessage(String address) {
-  OscMessage message = new OscMessage(address);
-  message.add(1);
-  oscP5Send.send(message, myRemoteLocation);
+  ball.setBallColor(amp); // Set the ball color based on the received OSC message
 }
 
 void draw() {
@@ -60,13 +57,20 @@ class Ball {
   int x, y;
   int radius;
   int speed;
+  int ballColor;
 
   // Constructor to initialize the Ball object
   Ball(int x, int y) {
     this.x = x;
     this.y = y;
-    this.radius = width / 6;
+    this.radius = width/6;
     this.speed = 12;
+    this.ballColor = 0;
+  }
+
+  // Set ball color based on OSC message
+  void setBallColor(int amp) {
+    this.ballColor = amp;
   }
 
   // Update the ball's position and handle collisions
@@ -78,12 +82,12 @@ class Ball {
       this.y = height - this.radius;
       this.speed *= -1;
       // Send OSC message
-      sendOSCMessage(OSC_ADDRESS_B1);
+      sendOSCMessage(OSC_ADDRESS_B1, 1);
     } else if (this.y < this.radius) {
       this.y = this.radius;
       this.speed *= -1;
       // Send OSC message
-      sendOSCMessage(OSC_ADDRESS_B2);
+      sendOSCMessage(OSC_ADDRESS_B2, 2);
     }
   }
 
@@ -93,4 +97,11 @@ class Ball {
     noStroke();
     ellipse(this.x, this.y, this.radius * 2, this.radius * 2);
   }
+}
+
+// Send OSC message
+void sendOSCMessage(String address, int value) {
+  OscMessage message = new OscMessage(address);
+  message.add(value);
+  oscP5Send.send(message, myRemoteLocation);
 }
