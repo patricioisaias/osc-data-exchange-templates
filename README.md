@@ -22,7 +22,7 @@ These templates provide a starting point for your interactive projects. Here's h
 1. **Configure IP Address:**
 
    - Open the Processing sketch.
-   - Locate the `remoteIp` variable and replace the existing IP address with your current one. If you're unsure about your IP address, open the terminal and type `ipconfig`. Look for the IPv4 address and use it as your `remoteIp`.
+   - Locate the `remoteIp` variable (line 25) and replace the existing IP address with your current one. If you're unsure about your IP address, open the terminal and type `ipconfig`. Look for the IPv4 address and use it as your `remoteIp`.
 
 2. **Customize OSC Ports:**
 
